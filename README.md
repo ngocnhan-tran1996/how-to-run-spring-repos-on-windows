@@ -2,7 +2,7 @@
 
 ## Spring Security
 
-Prerequisite: Clone the repository https://github.com/spring-projects/spring-security
+**Prerequisite:** Clone the repository https://github.com/spring-projects/spring-security
 
 1. Open the file `spring-security\docs\antora.yml` and replace every command that starts with `command: gradlew ...` with `command: <Your Disk>:\<Your Folder>\spring-security\gradlew ...`
 
@@ -31,7 +31,7 @@ Prerequisite: Clone the repository https://github.com/spring-projects/spring-sec
 
 ## Spring AMQP
 
-Prerequisite: Clone the repository https://github.com/spring-projects/spring-amqp
+**Prerequisite:** Clone the repository https://github.com/spring-projects/spring-amqp
 
 1. Open the file `spring-amqp\src\reference\antora\antora.yml` and replace every command that starts with `command: gradlew ...` with `command: <Your Disk>:\<Your Folder>\spring-amqp\gradlew ...`
 
