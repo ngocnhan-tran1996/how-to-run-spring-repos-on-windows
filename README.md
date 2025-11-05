@@ -18,7 +18,7 @@ Prerequisite: Clone the repository https://github.com/spring-projects/spring-sec
 
 3. Run Command Prompt as Administrator, then execute the following command: 
    ```shell
-   `mklink /D "<Your Disk\Your Folder>\spring-security\docs\modules\ROOT\examples\docs-src" <Your Disk\Your Folder>\spring-security\docs\src"`
+   mklink /D "<Your Disk\Your Folder>\spring-security\docs\modules\ROOT\examples\docs-src" <Your Disk\Your Folder>\spring-security\docs\src"
    ```
 
    **Example:** `mklink /D "D:\Source\fork\spring-security\docs\modules\ROOT\examples\docs-src" "D:\Source\fork\spring-security\docs\src"`
