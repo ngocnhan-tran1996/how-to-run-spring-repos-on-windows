@@ -1,0 +1,83 @@
+= How to Run Spring Docs on Windows
+:toc:
+:author: Ngoc Nhan
+
+== Spring Security
+
+**Prerequisite:** Clone the repository https://github.com/spring-projects/spring-security
+
+1. Open the file `spring-security\docs\antora.yml` and replace every command that starts with `command: gradlew ...` with `command: <Your Disk>:\<Your Folder>\spring-security\gradlew ...`
++
+**Example:**
++
+[source,yaml]
+----
+ext:
+  collector:
+    run:
+      command: D:\Source\fork\spring-security\gradlew -q -PbuildSrc.skipTests=true :spring-security-docs:generateAntoraResources
+----
+
+2. Delete the `docs-src` directory located at `spring-security\docs\modules\ROOT\examples\docs-src`
+
+3. Run Command Prompt as Administrator, then execute the following command:
++
+[source,shell]
+----
+mklink /D "<Your Disk\Your Folder>\spring-security\docs\modules\ROOT\examples\docs-src" <Your Disk\Your Folder>\spring-security\docs\src"
+----
++
+**Example:**
++
+[source,shell]
+----
+mklink /D "D:\Source\fork\spring-security\docs\modules\ROOT\examples\docs-src" "D:\Source\fork\spring-security\docs\src"
+----
+
+4. Run the following command to build the documentation: `./gradlew :spring-security-docs:antora`
+
+
+== Spring AMQP
+
+**Prerequisite:** Clone the repository https://github.com/spring-projects/spring-amqp
+
+1. Open the file `spring-amqp\src\reference\antora\antora.yml` and replace every command that starts with `command: gradlew ...` with `command: <Your Disk>:\<Your Folder>\spring-amqp\gradlew ...`
++
+**Example:**
++
+[source,yaml]
+----
+ext:
+  collector:
+    run:
+      command: D:\Source\fork\spring-amqp\gradlew -q :generateAntoraResources
+----
+
+2. Run the following command to build the documentation: `./gradlew antora`
+
+
+== Spring Data Commons
+
+**Prerequisite:** https://github.com/spring-projects/spring-data-commons
+
+1. Open the file `spring-data-commons\src\main\antora\antora.yml` and replace every command that starts with `command: ./mvnw ...` with `command: <Your Disk>:\<Your Folder>\spring-data-commons\mvnw ...`
++
+**Example:**
++
+[source,yaml]
+----
+ext:
+  collector:
+    - run:
+        command: D:\Source\fork\spring-data-commons\mvnw validate process-resources -am -Pantora-process-resources
+        local: true
+      scan:
+        dir: target/classes/antora-resources/
+    - run:
+        command: D:\Source\fork\spring-data-commons\mvnw package -Pdistribute
+        local: true
+      scan:
+        dir: target/antora
+----
+
+2. Run the following command to build the documentation: `./mvnw clean install -Pantora`
