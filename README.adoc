@@ -24,7 +24,7 @@ ext:
 +
 [source,shell]
 ----
-mklink /D "<Your Disk\Your Folder>\spring-security\docs\modules\ROOT\examples\docs-src" <Your Disk\Your Folder>\spring-security\docs\src"
+mklink /D "<Your Disk>:\<Your Folder>\spring-security\docs\modules\ROOT\examples\docs-src" "<Your Disk>:\<Your Folder>\spring-security\docs\src"
 ----
 +
 **Example:**
@@ -127,4 +127,20 @@ content:
       start_path: src/main/antora
 ----
 
-3. Run the following command to build the documentation: `./mvnw clean install -Pantora`
+3. Delete the `r2dbc` directory located at `spring-data-relational\src\main\antora\modules\ROOT\examples\r2dbc`
+
+4. Run Command Prompt as Administrator, then execute the following command:
++
+[source,shell]
+----
+mklink /D "<Your Disk>:\<Your Folder>\spring-data-relational\src\main\antora\modules\ROOT\examples\r2dbc" "<Your Disk>:\<Your Folder>\spring-data-relational\spring-data-r2dbc\src\test\java\org\springframework\data\r2dbc\documentation"
+----
++
+**Example:**
++
+[source,shell]
+----
+mklink /D "D:\Source\fork\spring-data-relational\src\main\antora\modules\ROOT\examples\r2dbc" "D:\Source\fork\spring-data-relational\spring-data-r2dbc\src\test\java\org\springframework\data\r2dbc\documentation"
+----
+
+5. Run the following command to build the documentation: `./mvnw clean install -Pantora`
