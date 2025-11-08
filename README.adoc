@@ -58,7 +58,7 @@ ext:
 
 == Spring Data Commons
 
-**Prerequisite:** https://github.com/spring-projects/spring-data-commons
+**Prerequisite:** Clone the repository https://github.com/spring-projects/spring-data-commons
 
 1. Open the file `spring-data-commons\src\main\antora\antora.yml` and replace every command that starts with `command: ./mvnw ...` with `command: <Your Disk>:\<Your Folder>\spring-data-commons\mvnw ...`
 +
@@ -81,3 +81,50 @@ ext:
 ----
 
 2. Run the following command to build the documentation: `./mvnw clean install -Pantora`
+
+
+== Spring Data Relational
+
+**Prerequisite:** Clone the repository
+
+- https://github.com/spring-projects/spring-data-commons
+- https://github.com/spring-projects/spring-data-relational
+
+1. Open the file `spring-data-relational\src\main\antora\antora.yml` and replace every command that starts with `command: ./mvnw ...` with `command: <Your Disk>:\<Your Folder>\spring-data-relational\mvnw ...`
++
+**Example:**
++
+[source,yaml]
+----
+ext:
+  collector:
+    - run:
+        command: D:\Source\fork\spring-data-relational\mvnw validate process-resources -pl :spring-data-jdbc-distribution -am -Pantora-process-resources
+        local: true
+      scan:
+        dir: spring-data-jdbc-distribution/target/classes/
+    - run:
+        command: D:\Source\fork\spring-data-relational\mvnw package -Pdistribute
+        local: true
+      scan:
+        dir: target/antora
+----
+
+2. Open the file `spring-data-relational\src\main\antora\antora-playbook.yml` and make the following changes:
++
+**Example:**
++
+[source,yaml]
+----
+content:
+  sources:
+    - url: ./../../..
+      branches: HEAD
+      start_path: src/main/antora
+      worktrees: true
+    - url: D:\Source\fork\spring-data-commons # Change https://github.com/spring-projects/spring-data-commons to <Your Disk>:\<Your Folder>\spring-data-relational
+      branches: HEAD # Change to HEAD
+      start_path: src/main/antora
+----
+
+3. Run the following command to build the documentation: `./mvnw clean install -Pantora`
