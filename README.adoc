@@ -144,3 +144,98 @@ mklink /D "D:\Source\fork\spring-data-relational\src\main\antora\modules\ROOT\ex
 ----
 
 5. Run the following command to build the documentation: `./mvnw clean install -Pantora`
+
+
+== Spring Framework
+
+**Prerequisite:** Clone the repository https://github.com/spring-projects/spring-framework
+
+1. Open the file `spring-framework\framework-docs\antora.yml` and replace every command that starts with `command: gradlew ...` with `command: <Your Disk>:\<Your Folder>\spring-framework\gradlew ...`
++
+**Example:**
++
+[source,yaml]
+----
+ext:
+  collector:
+    run:
+      command: D:\Source\fork\spring-framework\gradlew -q -PbuildSrc.skipTests=true "-Dorg.gradle.jvmargs=-Xmx3g" :framework-docs:generateAntoraResources
+      local: true
+    scan:
+      dir: ./build/generated-antora-resources
+----
+
+2. Open the file `spring-framework\framework-docs\antora-playbook.yml` and make the following changes:
++
+**Example:**
++
+[source,yaml]
+----
+content:
+  sources:
+  - url: ../ # https://github.com/spring-projects/spring-framework
+    branches: HEAD # ['main', '{6..9}.+({1..9}).x']
+    # tags: ['v{6..9}.+({0..9}).+({0..9})?(-{RC,M}*)', '!(v6.0.{0..8})', '!(v6.0.0-{RC,M}{0..9})']
+    start_path: framework-docs
+----
+
+3. Delete the `docs-src` directory located at `spring-framework\framework-docs\modules\ROOT\examples\docs-src`
+
+4. Run Command Prompt as Administrator, then execute the following command:
++
+[source,shell]
+----
+mklink /D "<Your Disk>:\<Your Folder>\spring-framework\framework-docs\modules\ROOT\examples\docs-src" "<Your Disk>:\<Your Folder>\spring-framework\framework-docs\src"
+----
++
+**Example:**
++
+[source,shell]
+----
+mklink /D "D:\Source\fork\spring-framework\framework-docs\modules\ROOT\examples\docs-src" "D:\Source\fork\spring-framework\framework-docs\src"
+----
+
+5. Run the following command to build the documentation: `./gradlew :framework-docs:antora`
+
+
+== Spring Kafka
+
+
+**Prerequisite:** Clone the repository https://github.com/spring-projects/spring-kafka
+
+1. Open the file `spring-kafka\spring-kafka-docs\src\main\antora\antora.yml` and replace every command that starts with `command: gradlew ...` with `command: <Your Disk>:\<Your Folder>\spring-kafka\gradlew ...`
++
+**Example:**
++
+[source,yaml]
+----
+ext:
+  collector:
+    run:
+      # FIXME Change "command" to the command that generates your antora.yml and other antora resources
+      # See https://gitlab.com/antora/antora-collector-extension/-/blob/main/docs/modules/ROOT/pages/configuration-keys.adoc?ref_type=heads#collector-reference
+      # HINT: Maven is typically something like:
+      # ./mvnw validate process-resources -am -Pantora-process-resources
+      command: D:\Source\fork\spring-kafka\gradlew :spring-kafka-docs:generateAntoraResources
+      local: true
+----
+
+2. Delete the `java-examples` and `kotlin-examples` directories located at `spring-kafka\spring-kafka-docs\src\main\antora\modules\ROOT\examples`.
+
+3. Run Command Prompt as Administrator, then execute the following command:
++
+[source,shell]
+----
+mklink /D "<Your Disk>:\<Your Folder>\spring-kafka\spring-kafka-docs\src\main\antora\modules\ROOT\examples\java-examples" "<Your Disk>:\<Your Folder>\spring-kafka\spring-kafka-docs\src\main\java"
+mklink /D "<Your Disk>:\<Your Folder>\spring-kafka\spring-kafka-docs\src\main\antora\modules\ROOT\examples\kotlin-examples" "<Your Disk>:\<Your Folder>\spring-kafka\spring-kafka-docs\src\main\kotlin"
+----
++
+**Example:**
++
+[source,shell]
+----
+mklink /D "D:\Source\fork\spring-kafka\spring-kafka-docs\src\main\antora\modules\ROOT\examples\java-examples" "D:\Source\fork\spring-kafka\spring-kafka-docs\src\main\java"
+mklink /D "D:\Source\fork\spring-kafka\spring-kafka-docs\src\main\antora\modules\ROOT\examples\kotlin-examples" "D:\Source\fork\spring-kafka\spring-kafka-docs\src\main\kotlin"
+----
+
+4. Run the following command to build the documentation: `./gradlew antora`
