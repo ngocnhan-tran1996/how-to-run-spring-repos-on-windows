@@ -239,3 +239,47 @@ mklink /D "D:\Source\fork\spring-kafka\spring-kafka-docs\src\main\antora\modules
 ----
 
 4. Run the following command to build the documentation: `./gradlew antora`
+
+
+== Micrometer
+
+**Prerequisite:** Clone the repository https://github.com/micrometer-metrics/micrometer
+
+1. Open the file `micrometer\docs\antora.yml` and replace every command that starts with `command: gradlew ...` with `command: <Your Disk>:\<Your Folder>\micrometer\gradlew ...`
++
+**Example:**
++
+[source,yaml]
+----
+ext:
+  collector:
+    run:
+      command: D:\Source\fork\micrometer\gradlew -q -PbuildSrc.skipTests=true -Pantora :docs:generateAntoraResources
+      local: true
+    scan:
+      dir: ./build/generated-antora-resources
+----
+
+2. Delete the `core-test`, `docs-src`, `micrometer-java11-test` and `micrometer-test` directories located at `micrometer\docs\modules\ROOT\examples`.
+
+3. Run Command Prompt as Administrator, then execute the following command:
++
+[source,shell]
+----
+mklink /D "<Your Disk>:\<Your Folder>\micrometer\docs\modules\ROOT\examples\core-test" "<Your Disk>:\<Your Folder>\micrometer\micrometer-core\src\test\java"
+mklink /D "<Your Disk>:\<Your Folder>\micrometer\docs\modules\ROOT\examples\docs-src" "<Your Disk>:\<Your Folder>\micrometer\docs\src"
+mklink /D "<Your Disk>:\<Your Folder>\micrometer\docs\modules\ROOT\examples\micrometer-java11-test" "<Your Disk>:\<Your Folder>\micrometer\micrometer-java11\src\test\java"
+mklink /D "<Your Disk>:\<Your Folder>\micrometer\docs\modules\ROOT\examples\micrometer-test" "<Your Disk>:\<Your Folder>\micrometer\micrometer-test\src\test\java"
+----
++
+**Example:**
++
+[source,shell]
+----
+mklink /D "D:\Source\fork\micrometer\docs\modules\ROOT\examples\core-test" "D:\Source\fork\micrometer\micrometer-core\src\test\java"
+mklink /D "D:\Source\fork\micrometer\docs\modules\ROOT\examples\docs-src" "D:\Source\fork\micrometer\docs\src"
+mklink /D "D:\Source\fork\micrometer\docs\modules\ROOT\examples\micrometer-java11-test" "D:\Source\fork\micrometer\micrometer-java11\src\test\java"
+mklink /D "D:\Source\fork\micrometer\docs\modules\ROOT\examples\micrometer-test" "D:\Source\fork\micrometer\micrometer-test\src\test\java"
+----
+
+4. Run the following command to build the documentation: `./gradlew antora`
